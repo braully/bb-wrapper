@@ -216,10 +216,12 @@ class BaseBBWrapper(RequestsWrapper):
             session.mount("http://", HTTPAdapter(max_retries=retry_strategy))
             session.mount("https://", HTTPAdapter(max_retries=retry_strategy))
             response = session.post(url, **kwargs)
+            print(f'response: {response}')
             response = self._process_response(response)
             self._access_token = response.data["access_token"]
             self._token_type = response.data["token_type"]
             self._token_time = datetime.now()
+            print(f'AUTENTICADO COM SUSESSO: {self._access_token}' )
             return True
         return False
 
